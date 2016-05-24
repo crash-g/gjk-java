@@ -4,7 +4,7 @@ package com.burumbum.gjk;
  * useful operations with vectors
  */
 public class VecOperation {
-    public final static float[] ORIGIN = new float[Point.DIM];
+    public static final float[] ORIGIN = new float[Point.DIM];
     // cross product only works with three dimensional vectors and it does not check that the input is correct
     public static float[] cross(float[] a, float[] b) {
         return new float[]{a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]};

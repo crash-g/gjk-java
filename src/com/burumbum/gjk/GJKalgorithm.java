@@ -6,11 +6,11 @@ import java.util.Vector;
  * Main class of the implementation of GJK.
  */
 public class GJKalgorithm {
-    // A small quantity. Anything is smaller is treated as zero.
-    private final static float EPSILON = 0.00001f;
+    // A small quantity. Anything smaller is treated as zero.
+    private static final float EPSILON = 0.00001f;
 
     //Debug variables
-    private final static int bigNumber = 100;
+    private static final int BIG_NUMBER = 100;
     private static int calls = 0;
     private static float averageCycles = 0;
 
@@ -50,7 +50,7 @@ public class GJKalgorithm {
             }
             s.addVertex(new Point(supportVertex));
         }
-        for(int k=0; k < bigNumber; k++) {
+        for(int k = 0; k < BIG_NUMBER; k++) {
             witness = s.computeClosestToOrigin();
             updateWitnessVertices(s);
             if(Point.equal(witness,Point.ORIGIN)) {
@@ -67,7 +67,7 @@ public class GJKalgorithm {
             s.addVertex(new Point(supportVertex));
         }
         System.out.println("Could not find exact solution, outputting approximate solution.");
-        averageCycles = ((calls-1)*averageCycles + bigNumber)/calls;
+        averageCycles = ((calls-1)*averageCycles + BIG_NUMBER)/calls;
         return (float) Math.sqrt(Point.squaredDistance(witness,Point.ORIGIN));
     }
     private static void updateWitnessVertices(Simplex s) {

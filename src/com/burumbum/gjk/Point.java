@@ -1,23 +1,20 @@
 package com.burumbum.gjk;
 
 /**
- * a point in a space with DIM dimensions.
+ * A point in a space with DIM dimensions.
  */
 public class Point {
-    public final static int DIM = 3;
-    private final static float[] ZEROES = new float[DIM];
+    public static final int DIM = 3;
+    private static final float[] ZEROES = new float[DIM];
 
-    public final static Point ORIGIN = new Point(ZEROES);
+    public static final Point ORIGIN = new Point(ZEROES);
 
     private float[] coord = new float[DIM];
 
     public Point(float[] v) {
-        if(v.length == DIM) {
-            for(int i=0; i<DIM; i++) {
-                coord[i] = v[i];
-            }
-        } else {
-            System.out.println("Cannot create point, size is not correct.");
+        assert DIM == v.length;
+        for(int i=0; i<DIM; i++) {
+            coord[i] = v[i];
         }
     }
     public Point(Point a) {
