@@ -1,53 +1,34 @@
 package com.burumbum.gjk;
 
 /**
- * useful operations with vectors
+ * Useful operations with vectors.
  */
-public class VecOperation {
-    public static final float[] ORIGIN = new float[Point.DIM];
-    // cross product only works with three dimensional vectors and it does not check that the input is correct
-    public static float[] cross(float[] a, float[] b) {
+class VecOperation {
+    // cross product only works with three dimensional vectors
+    static float[] cross(float[] a, float[] b) {
+        assert Point.DIM == a.length;
+        assert Point.DIM == b.length;
         return new float[]{a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]};
     }
 
-    public static float dot(float[] a, float[] b) {
+    static float dot(float[] a, float[] b) {
+        assert a.length == b.length;
         float result = 0;
-        int min = Math.min(a.length,b.length);
-        for(int i=0; i<min; i++) {
+        for(int i=0; i<a.length; i++) {
             result += a[i]*b[i];
         }
         return result;
     }
 
-    public static float[] reverse(float[] a) {
-        float[] result = copy(a);
+    static float[] reverse(float[] a) {
+        float[] result = new float[a.length];
         for(int i=0; i<result.length; i++) {
-            result[i]=-result[i];
+            result[i]=-a[i];
         }
         return result;
     }
-    public static float[] copy(float[] v) {
-        float[] result = new float[v.length];
-        for(int i=0; i<v.length; i++) {
-            result[i] = v[i];
-        }
-        return result;
-    }
-    //NOTE: Returns null if there is a problem
-    //TODO: Check it!
-    public static float[] matrixVectorProduct(float[][] m, float[] v) {
-        if(m != null && v != null && m.length > 0 && m[0].length == v.length) {
-            float[] result = new float[m.length];
-            for(int i=0; i<m.length; i++) {
-                for(int j=0; j<m[i].length; j++) {
-                    result[i] += m[i][j]*v[j];
-                }
-            }
-            return result;
-        }
-        return null;
-    }
-    public static Point pointLineDistance(Point p, Point a, Point b) {
+
+    static Point pointLineDistance(Point p, Point a, Point b) {
         float[] ab = Point.computeVector(a,b);
         float[] ap = Point.computeVector(a,p);
         float t = dot(ab,ap)/dot(ab,ab);
@@ -57,7 +38,8 @@ public class VecOperation {
         }
         return new Point(result);
     }
-    public static Point pointPlaneDistance(Point p, Point a, float[] n) {
+
+    static Point pointPlaneDistance(Point p, Point a, float[] n) {
         float[] pa = Point.computeVector(p,a);
         float t = dot(n,pa)/dot(n,n);
         float[] result = new float[Point.DIM];
@@ -66,6 +48,7 @@ public class VecOperation {
         }
         return new Point(result);
     }
+
     public static boolean equal(float[] v, float[] w) {
         if(v.length != w.length) {
             return false;
@@ -84,7 +67,9 @@ public class VecOperation {
         }
         return result;
     }
-    public static float[] difference(float[] v, float[] w) {
+
+    static float[] difference(float[] v, float[] w) {
+        assert v.length == w.length;
         float[] result = new float[v.length];
         for(int i=0; i<v.length; i++) {
             result[i] = v[i]-w[i];

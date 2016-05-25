@@ -14,7 +14,7 @@ public class QuickSortCollection<T extends AbstractList<E>, E extends Number & C
             order(v,0,v.size());
         }
     }
-    public void order(T v, int l, int r) {
+    void order(T v, int l, int r) {
         if (r - l > 1) {
             int i = partition(v, l, r);
 
@@ -27,7 +27,7 @@ public class QuickSortCollection<T extends AbstractList<E>, E extends Number & C
         int i=l;
 
         for (int j=l; j<r-1; j++) {
-            if(v.get(j).compareTo(x) <= 0) {
+            if(v.get(j).compareTo(x) < 0) {
                 E t = v.get(j);
                 v.set(j,v.get(i));
                 v.set(i,t);

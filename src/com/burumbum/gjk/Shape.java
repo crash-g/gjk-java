@@ -1,6 +1,6 @@
 package com.burumbum.gjk;
 
-/** a minimal interface for a shape */
+/** A minimal interface for a shape. */
 public interface Shape {
     public static final int FIRSTVERTEX = 0;
     public static final int INVALIDVERTEX = -1;
